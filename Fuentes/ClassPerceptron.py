@@ -4,7 +4,8 @@ import time
 from matplotlib import pylab as plt
 from IPython import display
 
-from grafica import *
+
+from Fuentes.grafica import *
 
 class Perceptron(object):
     """Perceptron classifier.

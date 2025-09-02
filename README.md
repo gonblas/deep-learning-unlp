@@ -14,5 +14,6 @@
 3. Instalar dependencias.
  ```bash
   pip install -r requirements.txt
+  python setup.py sdist bdist_wheel
   pip install .
   ```
