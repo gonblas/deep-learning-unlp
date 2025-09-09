@@ -4,7 +4,7 @@ import time
 from matplotlib import pylab as plt
 from IPython import display
 
-from grafica import *
+from Fuentes.grafica import *
 
 class NeuronaGradiente(object):
     """
@@ -24,6 +24,8 @@ class NeuronaGradiente(object):
         1 si dibuja -  0 si no
     title : list con 2 elementos
         titulos de los ejes - sólo 2D
+    with_bias : bool
+        whether to include a bias term in the model (default is True)
         
     Attributes
     -----------
@@ -32,7 +34,7 @@ class NeuronaGradiente(object):
     errors_ : list
         Number of misclassifications (updates) in each epoch.
     """
-    def __init__(self, alpha=0.01, n_iter=50, cotaE=10e-07, FUN='sigmoid', COSTO='ECM', random_state=None, draw=0, title=['X1','X2']):
+    def __init__(self, alpha=0.01, n_iter=50, cotaE=10e-07, FUN='sigmoid', COSTO='ECM', random_state=None, draw=0, title=['X1','X2'], with_bias=True):
         self.alpha = alpha
         self.n_iter = n_iter
         self.cotaE = cotaE
@@ -41,6 +43,7 @@ class NeuronaGradiente(object):
         self.random_state = random_state #-- asignar el valor 1 para fijar la semilla por defecto es aleatorio
         self.draw = draw
         self.title = title
+        self.with_bias = with_bias
 
     def fit(self, X, y):
         """Fit training data.
@@ -56,13 +59,15 @@ class NeuronaGradiente(object):
         self : object
         """
 
-          
         rgen = np.random.RandomState(self.random_state)
 
         # self.w_ = rgen.normal(loc=0.0, scale=0.01,size=1 + X.shape[1])
 
         self.w_ = rgen.uniform(-0.5, 0.5, size= X.shape[1]) 
-        self.b_ = rgen.uniform(-0.5, 0.5)
+        if (self.with_bias):
+            self.b_ = rgen.uniform(-0.5, 0.5)
+        else:
+            self.b_ = 0
         self.errors_ = []
         self.accuracy_ = []
         
@@ -82,7 +87,8 @@ class NeuronaGradiente(object):
                 update = self.alpha * errorXi * self.derivar(salida)
                 
                 self.w_ += update * xi
-                self.b_ += update
+                if(self.with_bias):
+                    self.b_ += update
                 
                 ErrorAct += self.fCosto(target, salida)
                 
@@ -94,6 +100,7 @@ class NeuronaGradiente(object):
                 ph = dibuPtosRecta(X,y, self.w_, self.b_, self.title, ph)
             
             i = i + 1
+        self.iterations_ = i
         return self
 
     def fCosto(self,y, y_hat):
