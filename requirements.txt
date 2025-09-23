@@ -5,3 +5,4 @@ seaborn
 chardet
 setuptools
 scikit-learn
+sympy
