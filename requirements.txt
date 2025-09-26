@@ -5,4 +5,5 @@ seaborn
 chardet
 setuptools
 scikit-learn
+tensorflow
 sympy
