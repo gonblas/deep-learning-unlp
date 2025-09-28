@@ -1,6 +1,6 @@
 # Deep Learning
 
-# Configurar
+## Configurar
 
 1. Clonar repositorio.
     ```bash
