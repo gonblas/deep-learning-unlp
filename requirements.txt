@@ -7,3 +7,5 @@ setuptools
 scikit-learn
 tensorflow
 sympy
+scikit-image
+plotly
