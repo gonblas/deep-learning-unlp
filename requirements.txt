@@ -9,3 +9,5 @@ tensorflow
 sympy
 scikit-image
 plotly
+livelossplot
+opencv-python
