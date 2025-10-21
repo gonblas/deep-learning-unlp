@@ -1,0 +1,5 @@
+# Ignorar carpeta de flores y todo su contenido
+FlowersX16/
+*.png
+*.jpg
+*.jpeg

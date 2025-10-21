@@ -11,3 +11,4 @@ scikit-image
 plotly
 livelossplot
 opencv-python
+livelossplot
